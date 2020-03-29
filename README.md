@@ -1,2 +1,2 @@
-# SchoolNetUtilities
-Repository for scripts and misc stuff for SchoolNet
+# SchoolNet Utilities
+Repository for scripts and miscellaneous stuff for SchoolNet
