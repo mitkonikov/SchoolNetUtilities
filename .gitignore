@@ -2,3 +2,5 @@
 /scripts/.env
 /node_modules
 keywords.js
+/python/env.py
+/python/__pycache__

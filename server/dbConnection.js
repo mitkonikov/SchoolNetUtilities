@@ -12,7 +12,8 @@ let defaultDatabaseSettings = {
 	port     : process.env.DATABASE_PORT,
 	host     : "localhost",
 	user     : process.env.DATABASE_USER,
-	password : process.env.DATABASE_PASS
+	password : process.env.DATABASE_PASS,
+	multipleStatements: true
 }
 
 defaultDatabaseSettings.database = "db_net";
@@ -47,10 +48,18 @@ module.exports.wordsDB = wordsDB;
 module.exports.records = records;
 module.exports.ZNAM = ZNAM;
 
-/** Collection of all the databases */
-module.exports.obj = {
+let obj = {
 	"db_net": network,
 	"db_words": wordsDB,
 	"db_records": records,
 	"db_znam": ZNAM
+};
+
+/** Collection of all the databases */
+module.exports.obj = obj;
+
+module.exports.endAll = () => {
+	for (let db in obj) {
+		obj[db].end();
+	}
 }
