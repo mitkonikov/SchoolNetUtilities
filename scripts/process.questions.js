@@ -12,7 +12,7 @@ let defaultEntry = {
     Answer_3: "",
     Answer_4: "",
     Truth: 0,
-    Difficulty: 1500,
+    Rating: 1500,
     Valid: 1,
     Origin: undefined
 }
@@ -57,7 +57,7 @@ fs.readFile("./raw/questions/" + FILE_NAME + ".txt", 'utf-8', (err, fullFile) =>
         }
 
         // set the origin
-        currentEntry.Origin = JSON.stringify({ "matura": currentYear });
+        currentEntry.Origin = "matura";
 
         let index = line.substring(0, 3);
 

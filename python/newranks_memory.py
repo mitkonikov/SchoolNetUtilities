@@ -15,11 +15,11 @@ mycursor = DATABASE.cursor()
 def sortRanks():
     start_time = time.time()
 
-    sql = "SELECT ID, Rank, Score FROM tbl_scoreboard" #ORDER BY Score DESC
+    sql = "SELECT ID, Rank, Score FROM tbl_leaderboard"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
 
-    myresult = sorted(myresult, key=lambda r: r[2], reverse=True)
+    myresult = sorted(myresult, key=lambda r: r[2], reverse=True) #ORDER BY Score DESC
 
     processed = list()
 
@@ -42,7 +42,7 @@ def sortRanks():
             processed.append(cList)
 
     for i in range(0, len(processed)):
-        sql = "UPDATE tbl_scoreboard SET Rank = %s WHERE ID = %s"
+        sql = "UPDATE tbl_leaderboard SET Rank = %s WHERE ID = %s"
         val = (processed[i][1], processed[i][0])
 
         mycursor.execute(sql, val)

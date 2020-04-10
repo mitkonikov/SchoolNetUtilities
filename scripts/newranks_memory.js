@@ -48,7 +48,7 @@ databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard", (err, rows) =
             console.log(err);
         }
     });
-
+});
 
     /*
     let count = 0;
@@ -71,4 +71,3 @@ databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard", (err, rows) =
     for (let i = 0; i < 10; ++i) {
         console.log(rows[i]);
     }*/
-});
