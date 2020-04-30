@@ -1,10 +1,10 @@
 const fs = require('fs');
 
-let process = (FILE_NAME) => {
+let process = (FILE_NAME, ID) => {
     let start = new Date();
 
     let defaultEntry = {
-        Subject: 8,
+        Subject: ID,
         Question: "",
         Answer_1: "",
         Answer_2: "",

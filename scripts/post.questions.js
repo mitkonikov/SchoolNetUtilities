@@ -2,7 +2,7 @@ const fs = require("fs");
 
 let databases = require("./../server/dbConnection");
 
-let post = (FILE_NAME) => {
+let post = (FILE_NAME, ID) => {
     fs.readFile("./processed/closedques/" + FILE_NAME + ".json", 'utf-8', (err, fullFile) => {
         if (err) {
             console.trace(err);
