@@ -2,7 +2,7 @@ let databases = require("../server/dbConnection");
 
 let start = new Date();
 
-databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard", (err, rows) => {    
+databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_leaderboard", (err, rows) => {    
     rows.sort((a, b) => (b.Score - a.Score));
 
     let newRows = [];
@@ -30,7 +30,7 @@ databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard", (err, rows) =
     let count = 0;
     let query = "";
     for (let row of newRows) {
-        query += "UPDATE tbl_scoreboard SET Rank='"+row.Rank+"' WHERE ID='"+row.ID+"'; ";
+        query += "UPDATE tbl_leaderboard SET Rank='"+row.Rank+"' WHERE ID='"+row.ID+"'; ";
         count++;
     }
 
@@ -49,25 +49,3 @@ databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard", (err, rows) =
         }
     });
 });
-
-    /*
-    let count = 0;
-    let done = false;
-    for (let row of rows) {
-        databases.ZNAM.query("UPDATE tbl_scoreboard SET Rank = ? WHERE ID = ?", [row.Rank, row.ID], (err, rows) => {
-            count++;
-            if (row.Score == 0) {
-                if (!done) {
-                    let end = new Date();
-                    console.log("Execution time: " + (end - start) + "ms"); // 13.5s - LOOONG
-                    console.log("Queries: " + count);
-                }
-                done = true;
-            }
-        })
-    }
-*/
-/*
-    for (let i = 0; i < 10; ++i) {
-        console.log(rows[i]);
-    }*/
