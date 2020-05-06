@@ -1,7 +1,8 @@
 const dotenv            = require('dotenv');
 dotenv.config();
 
-let test = require("./scripts/newranks_memory");
+let newRanks = require("./scripts/newranks_memory");
+let newRanksSubject = require("./scripts/newranks_memory_subjects");
 
 /*let processQs = require("./scripts/process.questions.js");
 let postQs = require("./scripts/post.questions.js");

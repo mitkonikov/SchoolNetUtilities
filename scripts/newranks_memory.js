@@ -23,9 +23,6 @@ databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_leaderboard", (err, rows) 
             newRows.push(row);
         }
     }
-    // EXEC TIME: 70ms
-
-    // rows.sort((a, b) => (a.ID - b.ID));
 
     let count = 0;
     let query = "";
