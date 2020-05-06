@@ -3,7 +3,11 @@ let databases = require("../server/dbConnection");
 let start = new Date();
 
 for (let i = 0; i < 9; ++i) {
-    databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard WHERE Subject = ?", i, (err, rows) => {    
+    databases.ZNAM.query("SELECT ID, Rank, Score FROM tbl_scoreboard WHERE Subject = ?", i, (err, rows) => {
+        if (typeof rows == "undefined" || rows.length == 0) {
+            return;
+        }
+        
         rows.sort((a, b) => (b.Score - a.Score));
 
         let newRows = [];
