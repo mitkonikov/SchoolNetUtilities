@@ -1,0 +1,6 @@
+Count of opened .txt files: 82065
+Count of total words: 33968568
+Count of total sentences: 1413836
+Average word count per article: 413.92271979528425
+Average sentence count per article: 17.228245902638154
+Time elapsed:  203.61876821517944
