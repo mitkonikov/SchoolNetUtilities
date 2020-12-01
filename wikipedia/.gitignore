@@ -1,4 +1,8 @@
 /RAW/
 config.py
 /wikipedia-mk/exports
+/wikipedia-mk/database-frq-less.txt
+/wikipedia-mk/database-frq-more.txt
+/wikipedia-mk/database-sorted.txt
+/wikipedia-mk/database.txt
 /__pycache__/

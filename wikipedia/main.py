@@ -1,8 +1,6 @@
 # https://dumps.wikimedia.org/mkwiki/20201101/
 
 import os
-from os import listdir
-from os.path import isfile, join
 import time
 import sys
 
@@ -16,13 +14,14 @@ import wikipedia.splitter as splitter
 import wikipedia.json_words_txt as json_words_txt
 # import wikipedia.indexing as indexing
 import wikipedia.open_file as open_file
+import wikipedia.find_examples as find_examples
 
 NAME = "wikipedia-mk"
-NAME_SEL = join(os.path.dirname(__file__), "./" + NAME)
+NAME_SEL = os.path.join(os.path.dirname(__file__), "./" + NAME)
 
 FRQ_FROM_ALL = "./wikipedia-mk-frq-from-all/"
 
-XML_FILE = join(os.path.dirname(__file__), "./RAW/articles.xml")
+XML_FILE = os.path.join(os.path.dirname(__file__), "./RAW/articles.xml")
 TXT_PATH = NAME_SEL + "/exports/"
 DATABASE_FILE = NAME_SEL + "/database.txt"
 SORTED_FILE = NAME_SEL + "/database-sorted.txt"
@@ -53,21 +52,25 @@ def main():
     '''
     text = xml_to_txt.readArticle(XML_FILE, "Географија на Македонија")
     open_file.write("./example_article.txt", text)
-    text_filtered = xml_to_txt.filterArticle(text)
-    open_file.write("./example_filtered.txt", text_filtered)
+    text_filtered = xml_to_txt.parseArticleFast(text)
+    open_file.write("./example_filtered_fast.txt", text_filtered)
+    txt_to_json.convertFile(text_filtered)
+    txt_to_json.printStats()
+    text_db = txt_to_json.DATABASE
+    open_file.writeJSON("./example_db_fast.txt", text_db)
     '''
 
     ### NOTE: These scripts are all single-threaded, so it takes some time to process the whole Wikipedia
     ### If someone would be kind enough to make them multi-threaded, that would be nice
 
     # Convert the big .XML file into small .TXT files for every article
-    # while filtering the characters (for more info, check the xml_to_txt converter)
+    # while doing some initial filtering (for more info, check the xml_to_txt converter)
     '''
     #input("Press any key to start the XML to TXT conversion...")
     xml_to_txt.convert(XML_FILE, TXT_PATH)
     xml_to_txt.printStats()
     
-    open_file.printFile(join(TXT_PATH, "Географија на Македонија.txt"), character_max = 1000)
+    open_file.printFile(os.path.join(TXT_PATH, "Географија на Македонија.txt"), character_max = 1000)
     '''
 
     # Dealing with BOT-generated files
@@ -104,7 +107,7 @@ def main():
             print ("Step delete is set to {}".format(STEP_DELETE))
         elif INPUT[0] == "delete":
             for FILE in FILTER_LIST:
-                NEXT_FILE = join(TXT_PATH, FILE)
+                NEXT_FILE = os.path.join(TXT_PATH, FILE)
 
                 if STEP_DELETE:
                     STEP = input("Next file: {}".format(NEXT_FILE))
@@ -154,6 +157,12 @@ def main():
     json_words_txt.printStats()
     '''
 
+    # Finds an example sentence that contains this word
+    
+    find_examples.init(TXT_PATH)
+    examples = find_examples.findExamples("Географија")
+    print('\n'.join(examples))
+    
     # Go through every TXT file ranking them by their word count
     '''
     indexing.compile(TXT_PATH)
@@ -175,7 +184,7 @@ def main():
     # If you want to open a specific file without opening the directory
     # Why? Opening the directory causes the OS to index the files in the directory
     # making you wait, so just use this function
-    ### open_file.printFile(join(TXT_PATH, "Географија на Македонија.txt"), CHARACTER_MAX=500)
+    ### open_file.printFile(os.path.join(TXT_PATH, "Географија на Македонија.txt"), CHARACTER_MAX=500)
 
     elapsed_time = time.time() - start_time
     print("Time elapsed: ", elapsed_time)

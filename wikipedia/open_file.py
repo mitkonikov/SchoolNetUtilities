@@ -1,4 +1,7 @@
 import os
+from os import listdir
+from os.path import isfile, join
+import json
 
 def printFile(file_path, character_max = "max"):
     # Get the absolute path to the file
@@ -34,7 +37,10 @@ def write(file_path, text):
     file.write(text)
     file.close()
 
-def writeJSON(file_name, json):
+def writeJSON(file_name, json_data):
     export_file = open(file_name, "w+", encoding="UTF-8")
-    export_file.write(json.dumps(json, ensure_ascii = False, indent = 4))
+    export_file.write(json.dumps(json_data, ensure_ascii = False, indent = 4))
     export_file.close()
+
+def listFiles(dir_path):
+    return [f for f in listdir(dir_path) if isfile(join(dir_path, f))]

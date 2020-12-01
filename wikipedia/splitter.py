@@ -1,6 +1,5 @@
-from __future__ import print_function
-
 import json
+import wikipedia.open_file as open_file
 
 countSplit = [0, 0]
 
@@ -23,13 +22,8 @@ def splitFile(DATABASE_PATH, EXPORT_PATH_FIRST, EXPORT_PATH_SECOND, MIN_NUM):
 
     database_file.close()
 
-    output_big_file = open(EXPORT_PATH_FIRST, "w+", encoding="UTF-8")
-    output_big_file.write(json.dumps(output_big, ensure_ascii=False, indent=2))
-    output_big_file.close()
-
-    output_small_file = open(EXPORT_PATH_SECOND, "w+", encoding="UTF-8")
-    output_small_file.write(json.dumps(output_small, ensure_ascii=False, indent=2))
-    output_small_file.close()
+    open_file.writeJSON(EXPORT_PATH_FIRST, output_big)
+    open_file.writeJSON(EXPORT_PATH_SECOND, output_small)
 
     print("Done Spliting!")
 
