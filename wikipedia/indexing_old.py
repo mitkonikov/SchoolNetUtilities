@@ -1,6 +1,15 @@
 from os import listdir
 from os.path import isfile, join
 
+## NOTE: This is now deprecated
+# The following code was a usage example:
+#   - Go through every TXT file ranking them by their word count
+"""
+    indexing.compile(TXT_PATH)
+    indexing.sortByWordsPerArticle(TXT_PATH, BYWORDS_SORT)
+    splitter.splitFile(BYWORDS_SORT, BYWORDS_FRQ_MORE, BYWORDS_FRQ_LESS, 1000)
+"""
+
 def compile(TXT_PATH):
     print(listFiles(TXT_PATH)[:50])
     print("Finished listing all the files.")

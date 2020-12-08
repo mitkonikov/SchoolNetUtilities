@@ -12,9 +12,9 @@ import wikipedia.suffix_cleaner as suffix_cleaner
 import wikipedia.sort_json as sort_json
 import wikipedia.splitter as splitter
 import wikipedia.json_words_txt as json_words_txt
-# import wikipedia.indexing as indexing
 import wikipedia.open_file as open_file
 import wikipedia.find_examples as find_examples
+import wikipedia.indexing.main as indexing;
 
 NAME = "wikipedia-mk"
 NAME_SEL = os.path.join(os.path.dirname(__file__), "./" + NAME)
@@ -158,29 +158,24 @@ def main():
     '''
 
     # Finds an example sentence that contains this word
-    
+    '''
     find_examples.init(TXT_PATH)
     examples = find_examples.findExamples("Географија")
     print('\n'.join(examples))
-    
-    # Go through every TXT file ranking them by their word count
     '''
-    indexing.compile(TXT_PATH)
-    indexing.sortByWordsPerArticle(TXT_PATH, BYWORDS_SORT)
-    splitter.splitFile(BYWORDS_SORT, BYWORDS_FRQ_MORE, BYWORDS_FRQ_LESS, 1000)
-    '''
-    
-    # Index the files in the MySQL Database
-    '''import wikipedia.mysql_connection as mysql_connection'''
 
+    # Indexing the words in the database (500 words per chunk sent, skip the first 11)
     '''
-    input("Press any key to start indexing the files in the database...")
-    mysql_connection.indexRows()
+    indexing.indexWords(FRQ_MORE_FILE, 500, 0)
+    '''
+
+    # For now, it finds 4 examples for the first 5 words with frequency in the range of 1000, 10000 starting from the top (10000)
+    '''
+    import json
+    dictExamples = indexing.indexExamples(TXT_PATH, FRQ_MORE_FILE, 1000, 10000, 4, 5)
+    print(json.dumps(dictExamples, ensure_ascii=False))
     '''
     
-    # Add every word from the frq_more_file in the database
-    '''mysql_connection.addWords(FRQ_MORE_FILE)'''
-
     # If you want to open a specific file without opening the directory
     # Why? Opening the directory causes the OS to index the files in the directory
     # making you wait, so just use this function

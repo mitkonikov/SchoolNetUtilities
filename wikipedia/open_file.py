@@ -32,6 +32,10 @@ def printFile(file_path, character_max = "max"):
     
     file.close()
 
+def openJSON(file_path):
+    database_file = open(file_path, "r", encoding="UTF-8")
+    return json.loads(database_file.read())
+
 def write(file_path, text):
     file = open(file_path, "w+", encoding="UTF-8")
     file.write(text)

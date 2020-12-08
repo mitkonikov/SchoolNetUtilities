@@ -11,8 +11,8 @@ We get the [Macedonian Wikipedia Database Dump](https://dumps.wikimedia.org/mkwi
 2. Convert each article from the `.xml` file to it's own `.txt` file while filtering the articles of unnecessary data
 3. Create a `.json` dataset of words
 4. Split the `.json` file
-4. Test to find an example
-5. Index in a DB (* still in works)
+5. Index the words in a DB
+6. Finds examples for each word in some frequency range
 
 ---
 
