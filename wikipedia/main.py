@@ -14,7 +14,7 @@ import wikipedia.splitter as splitter
 import wikipedia.json_words_txt as json_words_txt
 import wikipedia.open_file as open_file
 import wikipedia.find_examples as find_examples
-import wikipedia.indexing.main as indexing;
+import wikipedia.indexing.main as indexing
 
 NAME = "wikipedia-mk"
 NAME_SEL = os.path.join(os.path.dirname(__file__), "./" + NAME)
@@ -34,6 +34,7 @@ BYWORDS_FRQ_LESS = NAME_SEL + "/bywords-frq-less.txt"
 
 ALL_FRQ_MORE = NAME_SEL + "/database-frq-more.txt"
 WORDS_TXT_FILE = NAME_SEL + "/database-words.txt"
+GENERATED_WORDS = NAME_SEL + "/ai_words.json"
 
 def main():
     print ("Processing...")
@@ -174,6 +175,11 @@ def main():
     import json
     dictExamples = indexing.indexExamples(TXT_PATH, FRQ_MORE_FILE, 1000, 10000, 4, 5)
     print(json.dumps(dictExamples, ensure_ascii=False))
+    '''
+
+    # Index some words from our AI
+    '''
+    indexing.indexGeneratedWords(GENERATED_WORDS)
     '''
     
     # If you want to open a specific file without opening the directory

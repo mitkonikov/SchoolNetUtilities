@@ -5,4 +5,5 @@ config.py
 /wikipedia-mk/database-frq-more.txt
 /wikipedia-mk/database-sorted.txt
 /wikipedia-mk/database.txt
+/wikipedia-mk/database-words.txt
 /__pycache__/

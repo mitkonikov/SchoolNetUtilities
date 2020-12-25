@@ -44,6 +44,7 @@ def indexWords(DATABASE_FILE, amount, skip):
     for chunk in chunks:
         chunkBody = {
             "auth": config.INDEX_API_KEY,
+            "mainWords": True,
             "words": chunk
         }
 
@@ -105,3 +106,14 @@ def indexExamples_old(txt_path, database_path, frq_more_than, frq_less_than, lim
     print("Count of words:", countWords)
 
     return dictExamples
+
+def indexGeneratedWords(GENERATED_WORDS: str):
+    word_data = wikipedia.open_file.openJSON(GENERATED_WORDS)
+    postBody = {
+        "auth": config.INDEX_API_KEY,
+        "aiGen": True,
+        "words": word_data["words"]
+    }
+
+    req = requests.post(url, data = json.dumps(postBody), verify = True, headers = headers)
+    print(req.text)

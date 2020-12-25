@@ -21,7 +21,7 @@ def clean(DATABASE_PATH, EXPORT_PATH):
     b = random.sample(a, len(a))
 
     for k in b:
-        resultTXT = resultTXT + json_list[k] + " "
+        resultTXT += json_list[k] + " "
         count += 1
 
     database_file.close()
